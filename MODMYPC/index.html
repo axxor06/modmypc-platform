@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ModMyPC | Premium Computer Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
+  <link rel="stylesheet" href="/assets/enhancements.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg: #0A0A0A;
+      --surface: #161616;
+      --card: #202020;
+      --primary: #DC2626;
+      --primary-light: rgba(220,38,38,0.12);
+      --primary-hover: #EF4444;
+      --accent: #B91C1C;
+      --border: #2D2D2D;
+      --dark: #F5F5F5;
+      --secondary: #A3A3A3;
+      --light-gray: #0A0A0A;
+      --white: #161616;
+      --gradient: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.3);
+      --shadow-md: 0 8px 28px rgba(0,0,0,0.4);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+      --radius-sm: 12px;
+      --radius: 18px;
+      --radius-lg: 24px;
+      --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px; --space-5: 48px; --space-6: 64px; --space-7: 96px;
+      --font-heading: 'Sora', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Restrained radial glow - premium accent, not a colorful aurora blob wash */
+    body::before {
+      content: ''; position: fixed; top: -20%; right: -10%; z-index: -2; pointer-events: none;
+      width: 60vw; height: 60vw; max-width: 900px; max-height: 900px;
+      background: radial-gradient(circle, rgba(220,38,38,0.10), transparent 65%);
+      filter: blur(60px);
+    }
+    h1, h2, h3 { font-family: var(--font-heading); letter-spacing: -0.02em; }
+    .container-nice { max-width: 1180px; margin: 0 auto; padding: 0 var(--space-3); }
+    .gradient-text {
+      background: linear-gradient(100deg, var(--primary), var(--primary-hover) 60%, var(--accent));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* Header Styles */
+    header {
+      position: sticky;
+      top: var(--space-2);
+      z-index: 1000;
+      max-width: 1180px;
+      margin: var(--space-2) auto 0;
+      padding: 0 var(--space-3);
+      background: rgba(22,22,22,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.35s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow-lg);
+      background: rgba(16,16,16,0.85);
+    }
+    header.hide-nav { transform: translateY(-140%); }
+
+    .header-container {
+      max-width: 100%;
+      margin: 0;
+      padding: 10px 8px 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.04);
+    }
+
+    .logo i {
+      font-size: 22px;
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(220,38,38,0.35);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 2000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .mobile-nav .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 36px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1c1420 0%, #100608 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0; opacity: 1; transition: opacity .6s;
+    }
+    .hero.no-video .hero-video { opacity: 0; }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(10,11,15,.55) 0%, rgba(10,11,15,.75) 60%, rgba(10,11,15,.92) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 24px; }
+    .hero-anim {
+      opacity: 0; transform: translateY(30px);
+      animation: heroFadeUp .8s ease forwards;
+    }
+    @keyframes heroFadeUp { to { opacity: 1; transform: translateY(0); } }
+    .scroll-indicator {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 2; color: rgba(255,255,255,.7); font-size: 22px; cursor: pointer;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    @keyframes scrollBounce { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 10px); } }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(220,38,38,0.12) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, #ff4d4d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--secondary);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease 0.4s backwards;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 28px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 16px rgba(220,38,38,0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220,38,38,0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    /* Special Offers Banner */
+    .offers-banner {
+      max-width: 1180px;
+      margin: var(--space-6) auto;
+      padding: var(--space-5) var(--space-4);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .offers-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .offers-content {
+      max-width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .offers-title {
+      text-align: center;
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .offers-slider {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .offer-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+
+    .offer-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .offer-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #ff2d55;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .offer-info {
+      padding: 20px;
+    }
+
+    .offer-info h3 {
+      color: var(--primary);
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .offer-info p {
+      color: var(--secondary);
+      font-size: 14px;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: var(--space-6) var(--space-3);
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--secondary);
+      margin-top: 24px;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--primary-light);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--secondary);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* PC Builder Section — Tabs + Panel + Summary (v3, structural rebuild) */
+    .builder-section { background: var(--bg); }
+
+    .builder-container {
+      background: transparent;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .builder-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: var(--space-3);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .builder-layout { grid-template-columns: 1fr; } }
+
+    /* Category list (left column on desktop, horizontal scroll strip on mobile) */
+    .builder-tabs {
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 10px; position: sticky; top: 100px;
+    }
+    @media (max-width: 900px) {
+      .builder-tabs { flex-direction: row; overflow-x: auto; position: static; gap: 8px; }
+    }
+    .builder-tab {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--radius-sm);
+      color: var(--secondary); font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: background .2s, color .2s; white-space: nowrap; border: 1px solid transparent;
+    }
+    .builder-tab:hover { background: rgba(220,38,38,0.08); color: var(--dark); }
+    .builder-tab.active { background: var(--primary); color: #fff; box-shadow: var(--shadow-sm); }
+    .builder-tab .bt-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.08); flex-shrink: 0; }
+    .builder-tab.active .bt-icon { background: rgba(255,255,255,0.2); }
+    .builder-tab .bt-check { margin-left: auto; color: var(--primary-hover); display: none; }
+    .builder-tab.filled .bt-check { display: inline; }
+    .builder-tab.active .bt-check { color: #fff; }
+
+    /* Right panel: current category's item grid */
+    .builder-panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: var(--space-3); min-height: 320px;
+    }
+    .builder-panel-title { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: var(--space-2); font-family: var(--font-heading); }
+    .item-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;
+      max-height: 460px; overflow-y: auto; padding-right: 4px;
+    }
+    .item-grid::-webkit-scrollbar { width: 6px; }
+    .item-grid::-webkit-scrollbar-track { background: transparent; }
+    .item-grid::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+    .item-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .item-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .item-card.selected { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); background: rgba(220,38,38,0.08); }
+    .item-card.selected::after {
+      content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--primary); color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center;
+    }
+    .item-card img {
+      width: 100%; height: 90px; object-fit: contain; border-radius: 8px; margin-bottom: 10px;
+      background: var(--surface); padding: 6px;
+    }
+    .item-name { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 6px; line-height: 1.3; min-height: 34px; }
+    .item-price { font-size: 15px; font-weight: 700; color: var(--primary); }
+
+    /* Selected build summary strip - shows across all categories at a glance */
+    .builder-summary-strip {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-3);
+    }
+    .summary-chip {
+      display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 999px; padding: 6px 8px 6px 12px; font-size: 13px; color: var(--dark);
+    }
+    .summary-chip .sc-price { color: var(--primary); font-weight: 700; }
+    .summary-chip .sc-remove {
+      width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--secondary); font-size: 10px;
+    }
+    .summary-chip .sc-remove:hover { background: var(--primary); color: #fff; }
+
+    /* Bill Section */
+    .bill-container {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      margin-top: 32px;
+      border: 2px solid var(--primary);
+    }
+
+    .bill-container h2 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .bill-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .bill-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-bottom: 24px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .bill-table thead {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .bill-table th,
+    .bill-table td {
+      padding: 16px;
+      text-align: left;
+    }
+
+    .bill-table th {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .bill-table tbody tr {
+      border-bottom: 1px solid var(--light-gray);
+      transition: background 0.2s ease;
+    }
+
+    .bill-table tbody tr:hover {
+      background: var(--primary-light);
+    }
+
+    .bill-summary {
+      border: 1px solid #242833;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .bill-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 22px;
+      font-size: 15px;
+      border-bottom: 1px solid #1a1e27;
+      background: #161922;
+    }
+
+    .bill-summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .bill-summary-row .row-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .bill-summary-row .row-label i {
+      width: 18px;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .bill-summary-row .row-value {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .bill-summary-row.discount-row .row-label,
+    .bill-summary-row.discount-row .row-value {
+      color: var(--accent);
+    }
+
+    .bill-summary-row.discount-row .row-label i {
+      color: var(--accent);
+    }
+
+    .bill-summary-row.grand-total-row {
+      background: var(--gradient);
+      padding: 18px 22px;
+    }
+
+    .bill-summary-row.grand-total-row .row-label {
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      gap: 10px;
+    }
+
+    .bill-summary-row.grand-total-row .row-label i {
+      color: white;
+    }
+
+    .bill-summary-row.grand-total-row .row-value {
+      color: white;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .bill-total-label {
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bill-total-amount {
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-success {
+      background: #22c55e;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #16a34a;
+    }
+
+    /* Custom Spec Box */
+    .custom-spec-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+      max-width: 800px;
+      margin: 48px auto;
+      border: 2px solid var(--light-gray);
+    }
+
+    .custom-spec-box h3 {
+      color: var(--primary);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .custom-spec-box p {
+      text-align: center;
+      color: var(--secondary);
+      margin-bottom: 24px;
+    }
+
+    .custom-spec-box textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 16px;
+      border: 2px solid var(--light-gray);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      resize: vertical;
+      transition: all 0.3s ease;
+    }
+
+    .custom-spec-box textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-light);
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--primary);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--primary);
+      margin: 0 auto 20px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover .contact-icon {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .contact-card h3 {
+      color: var(--dark);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      color: var(--secondary);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      color: var(--secondary);
+      text-align: center;
+      padding: var(--space-4) var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    footer p {
+      font-size: 15px;
+      opacity: 0.8;
+    }
+
+    /* Floating Icons */
+    .floating-icons {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+
+    .floating-icons a {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease backwards;
+    }
+
+    .floating-icons a:nth-child(1) { animation-delay: 0.1s; }
+    .floating-icons a:nth-child(2) { animation-delay: 0.2s; }
+    .floating-icons a:nth-child(3) { animation-delay: 0.3s; }
+
+    .floating-icons a:hover {
+      transform: scale(1.15) translateY(-4px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) and (min-width: 769px) {
+      nav { gap: 14px; }
+      nav a { font-size: 13px; }
+      .nav-btn { padding: 8px 12px !important; font-size: 13px; }
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 60px 24px;
+      }
+
+      .section {
+        padding: 60px 16px;
+      }
+
+      .item-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+      }
+
+      /* MOBILE BILL TABLE STYLING */
+      .bill-container {
+        padding: 20px 12px;
+      }
+
+      .bill-container h2 {
+        font-size: 22px;
+        margin-bottom: 16px;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .bill-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -12px;
+        padding: 0 12px;
+      }
+
+      .bill-table {
+        min-width: 100%;
+        font-size: 11px;
+        margin-bottom: 16px;
+      }
+
+      .bill-table thead {
+        background: var(--primary);
+      }
+
+      .bill-table th {
+        padding: 10px 6px;
+        font-size: 10px;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+      }
+
+      .bill-table td {
+        padding: 10px 6px;
+        font-size: 11px;
+        vertical-align: middle;
+      }
+
+      .bill-table td:first-child {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .bill-table td:last-child {
+        text-align: right;
+        font-weight: 700;
+        color: var(--primary);
+        white-space: nowrap;
+      }
+
+      .bill-table tbody tr {
+        border-bottom: 1px solid rgba(220,38,38,0.12);
+      }
+
+      .bill-table tbody tr:hover {
+        background: rgba(220,38,38,0.06);
+      }
+
+      .bill-summary {
+        border-radius: 10px;
+      }
+
+      .bill-summary-row {
+        padding: 11px 14px;
+        font-size: 13px;
+      }
+
+      .bill-summary-row.grand-total-row {
+        padding: 14px;
+      }
+
+      .bill-summary-row.grand-total-row .row-label {
+        font-size: 14px;
+      }
+
+      .bill-summary-row.grand-total-row .row-value {
+        font-size: 22px;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .loading {
+      animation: shimmer 2s infinite;
+      background: linear-gradient(to right, #0e1015 0%, #1e222b 20%, #0e1015 40%, #0e1015 100%);
+      background-size: 1000px 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="mainHeader">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <i class="fas fa-microchip"></i>
+        <span>ModMyPC</span>
+      </a>
+      <nav>
+        <a href="#services"><i class="fas fa-cogs"></i> Services</a>
+        <a href="#products"><i class="fas fa-shopping-bag"></i> Products</a>
+        <a href="#builder"><i class="fas fa-desktop"></i> PC Builder</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="/products.php"><i class="fas fa-store"></i> Shop</a>
+        <a href="/cart.php" id="navCartLink"><i class="fas fa-shopping-cart"></i> Cart<span id="navCartBadge"></span></a>
+        <a href="/auth/login.php" id="navAccountLink"><i class="fas fa-user"></i> Login</a>
+        <a href="modmypc/admin/login.php" class="nav-btn">
+   <i class="fas fa-user-shield"></i> Admin
+</a>
+      </nav>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <span class="close-btn" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></span>
+    <a href="#services" onclick="toggleMobileMenu()"><i class="fas fa-cogs"></i> Services</a>
+    <a href="#products" onclick="toggleMobileMenu()"><i class="fas fa-shopping-bag"></i> Products</a>
+    <a href="#builder" onclick="toggleMobileMenu()"><i class="fas fa-desktop"></i> PC Builder</a>
+    <a href="#contact" onclick="toggleMobileMenu()"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="/products.php" onclick="toggleMobileMenu()"><i class="fas fa-store"></i> Shop</a>
+    <a href="/cart.php" onclick="toggleMobileMenu()"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="/auth/login.php" id="mobileAccountLink" onclick="toggleMobileMenu()"><i class="fas fa-user"></i> Login</a>
+    <a href="modmypc/admin/login.php" onclick="toggleMobileMenu()"><i class="fas fa-user-shield"></i> Admin</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="heroSection">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
+           onerror="document.getElementById('heroSection').classList.add('no-video')">
+      <source src="/assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-anim" style="animation-delay:.1s">Premium Computer Solutions</h1>
+      <p class="hero-anim" style="animation-delay:.3s">Build, Upgrade, and Service Your Perfect PC with Expert Care</p>
+      <div class="hero-btns hero-anim" style="animation-delay:.5s">
+        <a href="#builder" class="btn btn-primary">
+          <i class="fas fa-tools"></i> Build Your PC
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <i class="fas fa-phone"></i> Contact Us
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="document.getElementById('services') ? document.getElementById('services').scrollIntoView({behavior:'smooth'}) : window.scrollBy({top: window.innerHeight * 0.8, behavior:'smooth'})">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+  <script>
+  // Hide the video gracefully if hero.mp4 isn't present yet (falls back to the gradient background).
+  (function () {
+    var v = document.getElementById('heroVideo');
+    v.addEventListener('error', function () { document.getElementById('heroSection').classList.add('no-video'); });
+    // If the video has no readable duration shortly after load attempt, also treat as failed.
+    setTimeout(function () {
+      if (v.readyState === 0) document.getElementById('heroSection').classList.add('no-video');
+    }, 2500);
+  })();
+  // Subtle parallax on the hero content as the user scrolls.
+  window.addEventListener('scroll', function () {
+    var hero = document.getElementById('heroSection');
+    var content = document.querySelector('.hero-content');
+    if (!hero || !content) return;
+    var rect = hero.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+      content.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+    }
+  }, { passive: true });
+  </script>
+
+  <!-- Stats Counter -->
+  <section style="padding:60px 24px; position:relative; z-index:1;">
+    <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:24px; text-align:center;">
+      <div data-aos="fade-up"><div class="counter-num gradient-text" data-counter="2500" data-suffix="+">0</div><div class="muted">PCs Built</div></div>
+      <div data-aos="fade-up" data-aos-delay="100"><div class="counter-num gradient-text" data-counter="98" data-suffix="%">0</div><div class="muted">Happy Customers</div></div>
+      <div data-aos="fade-up" data-aos-delay="200"><div class="counter-num gradient-text" data-counter="24" data-suffix="/7">0</div><div class="muted">Support Available</div></div>
+      <div data-aos="fade-up" data-aos-delay="300"><div class="counter-num gradient-text" data-counter="10" data-suffix="+">0</div><div class="muted">Years Experience</div></div>
+    </div>
+  </section>
+
+  <!-- Why ModMyPC — Bento Grid -->
+  <section style="padding:20px 24px 80px; position:relative; z-index:1;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <h2 class="gradient-text" style="text-align:center; margin-bottom:32px;" data-aos="fade-up">Why ModMyPC</h2>
+      <div class="bento-grid">
+        <div class="bento-item wide tall" data-aos="zoom-in" style="background:linear-gradient(160deg, rgba(255,56,96,0.12), rgba(124,92,255,0.08)); border:1px solid var(--border,rgba(255,255,255,.09)); border-radius:20px; padding:28px; display:flex; flex-direction:column; justify-content:center;">
+          <i class="fas fa-microchip" style="font-size:32px; color:var(--primary); margin-bottom:12px;"></i>
+          <h3 style="margin:0 0 8px;">Genuine Components</h3>
+          <p class="muted" style="margin:0;">Every part we sell is sourced from authorized distributors — no greymarket components, ever.</p>
+        </div>
+        <div class="bento-item" data-aos="zoom-in" data-aos-delay="100" style="background:rgba(255,255,255,0.04); border:1px solid var(--border,rgba(255,255,255,.09)); border-radius:20px; padding:24px; display:flex; flex-direction:column; justify-content:center;">
+          <i class="fas fa-tools" style="font-size:26px; color:var(--primary-hover,#EF4444); margin-bottom:10px;"></i>
+          <h3 style="margin:0 0 4px; font-size:16px;">Expert Assembly</h3>
+        </div>
+        <div class="bento-item" data-aos="zoom-in" data-aos-delay="200" style="background:rgba(255,255,255,0.04); border:1px solid var(--border,rgba(255,255,255,.09)); border-radius:20px; padding:24px; display:flex; flex-direction:column; justify-content:center;">
+          <i class="fas fa-shield-alt" style="font-size:26px; color:var(--accent,#B91C1C); margin-bottom:10px;"></i>
+          <h3 style="margin:0 0 4px; font-size:16px;">Real Warranty</h3>
+        </div>
+        <div class="bento-item wide" data-aos="zoom-in" data-aos-delay="300" style="background:rgba(255,255,255,0.04); border:1px solid var(--border,rgba(255,255,255,.09)); border-radius:20px; padding:24px; display:flex; align-items:center; gap:16px;">
+          <i class="fab fa-whatsapp" style="font-size:30px; color:#25D366;"></i>
+          <div><h3 style="margin:0 0 4px; font-size:16px;">Direct WhatsApp Support</h3><p class="muted" style="margin:0; font-size:13px;">Real answers from real technicians, not a chatbot.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Offers -->
+  <section class="offers-banner">
+    <div class="offers-content">
+      <h2 class="offers-title">
+        <i class="fas fa-fire"></i> Hot Deals & Special Offers
+      </h2>
+      <div class="offers-slider">
+        <div class="offer-card" onclick="window.open('https://wa.me/918089637705?text=I%20am%20interested%20in%20your%20offer', '_blank')">
+          <div class="offer-badge">NEW</div>
+          <img src="modmypc/offers/offer1.jpg" alt="Offer 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22%3E%3Crect fill=%22%23e8f4ff%22 width=%22300%22 height=%22250%22/%3E%3Ctext fill=%22%230071e3%22 font-family=%22Arial%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3ESpecial Offer%3C/text%3E%3C/svg%3E'">
+          <div class="offer-info">
+            <h3><i class="fas fa-gift"></i> Exclusive Bundle Deal</h3>
+            <p>Save up to 30% on complete PC setups</p>
+          </div>
+        </div>
+        <div class="offer-card" onclick="window.open('https://wa.me/918089637705?text=I%20am%20interested%20in%20your%20offer', '_blank')">
+          <div class="offer-badge">HOT</div>
+          <img src="modmypc/offers/offer2.jpg" alt="Offer 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22%3E%3Crect fill=%22%23e8f4ff%22 width=%22300%22 height=%22250%22/%3E%3Ctext fill=%22%230071e3%22 font-family=%22Arial%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3ESpecial Offer%3C/text%3E%3C/svg%3E'">
+          <div class="offer-info">
+            <h3><i class="fas fa-percentage"></i> Upgrade Special</h3>
+            <p>Free installation with component purchase</p>
+          </div>
+        </div>
+        <div class="offer-card" onclick="window.open('https://wa.me/918089637705?text=I%20am%20interested%20in%20your%20offer', '_blank')">
+          <div class="offer-badge">SALE</div>
+          <img src="modmypc/offers/offer4.jpg" alt="Offer 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22%3E%3Crect fill=%22%23e8f4ff%22 width=%22300%22 height=%22250%22/%3E%3Ctext fill=%22%230071e3%22 font-family=%22Arial%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3ESpecial Offer%3C/text%3E%3C/svg%3E'">
+          <div class="offer-info">
+            <h3><i class="fas fa-tags"></i> Service Package</h3>
+            <p>1 Year support with every custom build</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-subtitle">Professional computer services tailored to your needs</p>
+    </div>
+    <div class="card-grid">
+      <div class="card" onclick="location.href='modmypc/diagnosis.html'">
+        <div class="card-icon">
+          <i class="fas fa-stethoscope"></i>
+        </div>
+        <h3>Computer Diagnosis</h3>
+        <p>Expert troubleshooting for all hardware and software issues with quick turnaround</p>
+      </div>
+      <div class="card" onclick="location.href='modmypc/laptopservice.html'">
+        <div class="card-icon">
+          <i class="fas fa-laptop-medical"></i>
+        </div>
+        <h3>Laptop Service</h3>
+        <p>Screen, battery, motherboard repairs and upgrades for all major brands</p>
+      </div>
+      <div class="card" onclick="document.getElementById('builder').scrollIntoView({ behavior: 'smooth' })">
+        <div class="card-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Custom PC Build</h3>
+        <p>Build your dream PC with professional assembly and configuration</p>
+      </div>
+      <div class="card" onclick="window.open('https://wa.me/918089637705?text=I%20need%20technical%20support', '_blank')">
+        <div class="card-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <h3>Tech Support</h3>
+        <p>24/7 technical support and consultation for all your computer needs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="section" style="background: var(--light-gray);">
+    <div class="section-header">
+      <h2 class="section-title">Our Products</h2>
+      <p class="section-subtitle">Premium quality products from trusted brands</p>
+    </div>
+    <div class="card-grid">
+      <div class="card" onclick="location.href='modmypc/products.php?category=Laptop'">
+        <div class="card-icon">
+          <i class="fas fa-laptop"></i>
+        </div>
+        <h3>Laptops</h3>
+        <p>Latest models from Dell, HP, Lenovo, and more</p>
+      </div>
+      <div class="card" onclick="location.href='modmypc/products.php?category=Desktop'">
+        <div class="card-icon">
+          <i class="fas fa-desktop"></i>
+        </div>
+        <h3>Desktops</h3>
+        <p>Custom-built and branded desktop systems</p>
+      </div>
+      <div class="card" onclick="location.href='modmypc/products.php?category=Printer'">
+        <div class="card-icon">
+          <i class="fas fa-print"></i>
+        </div>
+        <h3>Printers</h3>
+        <p>Laser, inkjet & all-in-one printers</p>
+      </div>
+      <div class="card" onclick="location.href='modmypc/products.php'">
+        <div class="card-icon">
+          <i class="fas fa-keyboard"></i>
+        </div>
+        <h3>All Products</h3>
+        <p>Browse our full catalog — all categories</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PC Builder Section -->
+  <section id="builder" class="section builder-section">
+    <div class="section-header">
+      <h2 class="section-title">Build Your Custom PC</h2>
+      <p class="section-subtitle">Select components and get instant pricing with professional assembly</p>
+      <p style="margin-top:8px;"><a href="/builder.php" style="color:var(--primary,#DC2626); font-weight:600;"><i class="fas fa-save"></i> Prefer to save your build to your account and add it straight to your cart? Try the new PC Builder →</a></p>
+    </div>
+    
+    <div class="builder-container">
+      <form id="pcBuilderForm">
+        <div class="builder-layout">
+          <div class="builder-tabs" id="builderTabs"></div>
+          <div class="builder-panel">
+            <div class="builder-panel-title" id="builderPanelTitle">Select a component</div>
+            <div class="item-grid" id="builderItemGrid"></div>
+          </div>
+        </div>
+        <div class="builder-summary-strip" id="builderSummaryStrip"></div>
+
+        <!-- Bill Section -->
+        <div class="bill-container">
+          <h2><i class="fas fa-file-invoice"></i> Your Configuration</h2>
+          <div class="bill-table-wrapper">
+            <table class="bill-table">
+              <thead>
+                <tr>
+                  <th style="width: 30%">Component</th>
+                  <th style="width: 45%">Selection</th>
+                  <th style="width: 25%; text-align: right">Price</th>
+                </tr>
+              </thead>
+              <tbody id="billDetails">
+                <tr>
+                  <td colspan="3" style="text-align: center; padding: 2rem; color: var(--secondary)">
+                    <i class="fas fa-info-circle"></i> Select components to build your configuration
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bill-summary">
+            <div class="bill-summary-row">
+              <span class="row-label"><i class="fas fa-receipt"></i> Subtotal</span>
+              <span class="row-value" id="subtotalAmount">₹0</span>
+            </div>
+            <div class="bill-summary-row discount-row">
+              <span class="row-label"><i class="fas fa-tag"></i> Discount (5%)</span>
+              <span class="row-value" id="discountAmount">- ₹0</span>
+            </div>
+            <div class="bill-summary-row">
+              <span class="row-label"><i class="fas fa-percent"></i> GST (18%)</span>
+              <span class="row-value" id="gstAmount">₹0</span>
+            </div>
+            <div class="bill-summary-row grand-total-row">
+              <span class="row-label"><i class="fas fa-calculator"></i> Grand Total</span>
+              <span class="row-value" id="totalAmount">₹0</span>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="btn btn-primary" onclick="downloadPDFOnly()">
+              <i class="fas fa-download"></i> Download PDF
+            </button>
+            <button type="button" class="btn btn-success" onclick="generateAndSendInvoice()">
+              <i class="fas fa-paper-plane"></i> Download & Send to WhatsApp
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Custom Spec Box -->
+    <div class="custom-spec-box">
+      <h3><i class="fas fa-pen-fancy"></i> Have Custom Requirements?</h3>
+      <p>Share your specific needs and we'll create the perfect solution for you</p>
+      <textarea id="customSpec" placeholder="Example: I need a gaming PC for 4K gaming with RGB lighting, budget around ₹1,50,000..."></textarea>
+      <button class="btn btn-success" style="width: 100%; margin-top: 1rem; justify-content: center" onclick="sendCustomSpec()">
+        <i class="fab fa-whatsapp"></i> Send via WhatsApp
+      </button>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">We're here to help with all your computer needs</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email Us</h3>
+        <p>infinitytechnosolution@gmail.com</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <h3>Call Us</h3>
+        <p>+91 8089637705</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3>Visit Us</h3>
+        <p>23/1290, Harikkara Street<br>Court Road, Palakkad<br>Kerala 678001</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 ModMyPC - Infinity Techno Solution. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Floating Social Icons -->
+  <div class="floating-icons">
+    <a href="https://wa.me/918089637705" target="_blank" style="background: #25D366" title="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://instagram.com/infinity_tech_pkd" target="_blank" style="background: #E1306C" title="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="mailto:infinitytechnosolution@gmail.com" style="background: #EA4335" title="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Component Data
+    let componentData = JSON.parse(localStorage.getItem('componentData')) || {
+      processor: {
+        label: "Processor",
+        icon: "microchip",
+        items: {
+          "Intel Core i5-11400": { price: 10000, image: "modmypc/processor/process1.jpg" },
+          "Intel Core i5-12400": { price: 12000, image: "modmypc/processor/process2.jpg" },
+          "Intel Core i5-13400": { price: 13500, image: "modmypc/processor/process3.jpg" },
+          "Intel Core i7-11700": { price: 18000, image: "modmypc/processor/process4.jpg" },
+          "Intel Core i7-12700": { price: 22000, image: "modmypc/processor/process5.jpg" },
+          "Intel Core i7-13700": { price: 25000, image: "modmypc/processor/process6.jpg" },
+          "AMD Ryzen 5 5600X": { price: 14000, image: "modmypc/processor/process7.jpg" },
+          "AMD Ryzen 5 7600X": { price: 18000, image: "modmypc/processor/process8.jpg" },
+          "AMD Ryzen 7 5800X": { price: 22000, image: "modmypc/processor/process9.jpg" },
+          "AMD Ryzen 7 7800X3D": { price: 32000, image: "modmypc/processor/process10.jpg" }
+        }
+      },
+      ram: {
+        label: "RAM",
+        icon: "memory",
+        items: {
+          "4GB DDR4": { price: 1500, image: "modmypc/ram/ram4.1.jpg" },
+          "8GB DDR4": { price: 2500, image: "modmypc/ram/ram8.jpg" },
+          "16GB DDR4": { price: 4800, image: "modmypc/ram/ram16.jpg" },
+          "32GB DDR4": { price: 9000, image: "modmypc/ram/ram32.jpg" },
+          "64GB DDR4": { price: 18000, image: "modmypc/ram/ram64.jpg" }
+        }
+      },
+      graphics: {
+        label: "Graphics Card",
+        icon: "draw-polygon",
+        items: {
+          "NVIDIA GTX 1650": { price: 12000, image: "modmypc/ram/graphic2.jpg" },
+          "NVIDIA GTX 1660 Super": { price: 18000, image: "modmypc/ram/graphic3.jpg" },
+          "NVIDIA RTX 2060": { price: 24000, image: "modmypc/ram/graphic4.jpg" },
+          "NVIDIA RTX 3060": { price: 32000, image: "modmypc/ram/graphic5.jpg" },
+          "NVIDIA RTX 4060 Ti": { price: 38000, image: "modmypc/ram/graphic6.jpg" },
+          "AMD Radeon RX 6500 XT": { price: 14000, image: "modmypc/ram/graphic7.jpg" },
+          "AMD Radeon RX 6600": { price: 20000, image: "modmypc/ram/graphic8.jpg" },
+          "AMD Radeon RX 6700 XT": { price: 30000, image: "modmypc/ram/graphic9.jpg" },
+          "Intel Arc A750": { price: 25000, image: "modmypc/ram/graphic10.jpg" }
+        }
+      },
+      motherboard: {
+        label: "Motherboard",
+        icon: "server",
+        items: {
+          "ASUS Prime B450M": { price: 7000, image: "modmypc/ram/mother2.jpg" },
+          "MSI B550 Pro": { price: 9500, image: "modmypc/ram/mother3.jpg" },
+          "Gigabyte X570 AORUS": { price: 15000, image: "modmypc/ram/mother4.jpg" },
+          "ASRock B660M": { price: 12000, image: "modmypc/ram/mother5.jpg" },
+          "ASUS ROG STRIX Z790": { price: 25000, image: "modmypc/ram/mother6.jpg" }
+        }
+      },
+      cooler: {
+        label: "CPU Cooler",
+        icon: "fan",
+        items: {
+          "MAG CORELIQUID A13 240": { price: 5760, image: "modmypc/coolers/mag_coreliquid_a13_240.jpg" },
+          "MAG CORELIQUID A13 240 WHITE": { price: 6080, image: "modmypc/coolers/mag_coreliquid_a13_240_white.jpg" },
+          "MAG CORELIQUID A13 360": { price: 7168, image: "modmypc/coolers/mag_coreliquid_a13_360.jpg" },
+          "MSI MAG CORELIQUID A13 360 WHITE": { price: 7360, image: "modmypc/coolers/msi_mag_coreliquid_a13_360_white.jpg" },
+          "MAG CORELIQUID A15 360": { price: 8448, image: "modmypc/coolers/mag_coreliquid_a15_360.jpg" },
+          "MAG CORELIQUID I360": { price: 12160, image: "modmypc/coolers/mag_coreliquid_i360.jpg" },
+          "MPG CORELIQUID P13 360": { price: 16064, image: "modmypc/coolers/mpg_coreliquid_p13_360.jpg" }
+        }
+      },
+      cabinet: {
+        label: "Cabinet",
+        icon: "box",
+        items: {
+          "MSI PRO FORGE M050A": { price: 2880, image: "modmypc/cabinet/MSI_PRO_FORGE_M050A.jpg" },
+          "MSI MAG FORGE 320R Airflow": { price: 4800, image: "modmypc/cabinet/MSI_MAG_FORGE_320R_Airflow.jpg" },
+          "MSI MAG FORGE 321R Airflow": { price: 5696, image: "modmypc/cabinet/MSI_MAG_FORGE_321R_Airflow.jpg" },
+          "MSI MAG PANO 110R PZ": { price: 6858, image: "modmypc/cabinet/MSI_MAG_PANO_110R_PZ.jpg" },
+          "MSI PANO M110A": { price: 3840, image: "modmypc/cabinet/MSI_PANO_M110A.jpg" },
+          "MSI MAG FORGE 130A Airflow": { price: 3402, image: "modmypc/cabinet/MSI_MAG_FORGE_130A_Airflow.jpg" },
+          "MSI MAG FORGE 120A Airflow": { price: 3584, image: "modmypc/cabinet/MSI_MAG_FORGE_120A_Airflow.jpg" },
+          "MSI MPG VELOX 100R": { price: 9290, image: "modmypc/cabinet/MSI_MPG_VELOX_100R.jpg" },
+          "MSI MPG VELOX 300R Airflow PZ": { price: 11200, image: "modmypc/cabinet/MSI_MPG_VELOX_300R_Airflow_PZ.jpg" }
+        }
+      },
+      storage: {
+        label: "Storage",
+        icon: "hdd",
+        items: {
+          "256GB SSD": { price: 2000, image: "modmypc/cpu/primary1.jpg" },
+          "512GB SSD": { price: 3500, image: "modmypc/cpu/primary2.jpg" },
+          "1TB SSD": { price: 5500, image: "modmypc/cpu/primary3.2.jpg" },
+          "2TB SSD": { price: 9500, image: "modmypc/cpu/primary4.jpg" },
+          "1TB NVMe": { price: 6000, image: "modmypc/cpu/primary5.jpg" },
+          "2TB NVMe": { price: 11000, image: "modmypc/cpu/primary6.jpg" }
+        }
+      },
+      psu: {
+        label: "Power Supply",
+        icon: "bolt",
+        items: {
+          "MAG A550BN": { price: 3968, image: "modmypc/PSU/MAG_A550BN.jpg" },
+          "MAG A650BN": { price: 4672, image: "modmypc/PSU/MAG_A650BN.jpg" },
+          "MAG A750BN PCIE5": { price: 6016, image: "modmypc/PSU/MAG_A750BN_PCIE5.jpg" },
+          "MAG A750GL PCIE5": { price: 8320, image: "modmypc/PSU/MAG_A750GL_PCIE5.jpg" },
+          "MAG A850GL PCIE5": { price: 9504, image: "modmypc/PSU/MAG_A850GL_PCIE5.jpg" },
+          "MAG A1000GL PCIE5": { price: 15360, image: "modmypc/PSU/MAG_A1000GL_PCIE5.jpg" },
+          "MAG A1250GL PCIE5": { price: 19840, image: "modmypc/PSU/MAG_A1250GL_PCIE5.jpg" },
+          "MEG Ai1300P PCIE5": { price: 30592, image: "modmypc/PSU/MEG_Ai1300P_PCIE5.jpg" }
+        }
+      },
+      ups: {
+        label: "UPS (Optional)",
+        icon: "battery-full",
+        items: {
+          "APC 2KVA BVX2200LI-IN": { price: 14950, image: "modmypc/UPS/apc 2kva bvx2200li.jpeg" },
+          "APC BR1500G-IN": { price: 17490, image: "modmypc/UPS/BR1500G-IN.jpg" }
+        }
+      },
+      monitor: {
+        label: "Monitor",
+        icon: "tv",
+        items: {
+          "LG 24MP59G": { price: 9000, image: "modmypc/cpu/images.jpg" },
+          "Dell SE2422H": { price: 8000, image: "modmypc/cpu/images2.jpg" },
+          "Acer Nitro VG240YS": { price: 10500, image: "modmypc/cpu/images3.1.jpg" },
+          "Samsung LF24T350FHWXXL": { price: 7800, image: "modmypc/cpu/images4.1.jpg" },
+          "ASUS TUF Gaming VG249Q1R": { price: 11000, image: "modmypc/cpu/images5.jpg" }
+        }
+      },
+      os: {
+        label: "Operating System",
+        icon: "windows",
+        items: {
+          "Windows 10 Home": { price: 9000, image: "modmypc/cpu/window10.jpg" },
+          "Windows 10 Pro": { price: 14000, image: "modmypc/cpu/window2.jpg" },
+          "Windows 11 Home": { price: 10000, image: "modmypc/cpu/window3.jpg" },
+          "Windows 11 Pro": { price: 15000, image: "modmypc/cpu/window4.jpg" },
+          "Linux Ubuntu": { price: 0, image: "modmypc/cpu/ubuntu.jpg" },
+          "No Operating System": { price: 0, image: "modmypc/cpu/error.jpg" }
+        }
+      },
+      service: {
+        label: "Service",
+        icon: "toolbox",
+        items: {
+          "Assembly Only": { price: 1500, image: "modmypc/Service/assembly.jpg" },
+          "Assembly + OS Installation": { price: 3000, image: "modmypc/Service/assembly2.jpg" },
+          "Full Setup (Assembly, OS, Drivers)": { price: 4500, image: "modmypc/Service/assembly3.jpg" },
+          "Home Delivery & Setup": { price: 1000, image: "modmypc/Service/assembly4.jpg" },
+          "Technical Support (1 Year)": { price: 2000, image: "modmypc/Service/assembly5.jpg" }
+        }
+      },
+      mouse: {
+        label: "Mouse (Optional)",
+        icon: "mouse",
+        items: {
+          "Logitech G102 Lightsync": { price: 1795, image: "modmypc/mouse/logitech.jpg" },
+          "Razer DeathAdder Essential": { price: 2199, image: "modmypc/mouse/razer.jpg" },
+          "HP X1000 Wired Mouse": { price: 499, image: "modmypc/mouse/hp.jpg" },
+          "LAPCARE L70 PLUS": { price: 190, image: "modmypc/mouse/lapcare.jpg" }
+        }
+      },
+      keyboard: {
+        label: "Keyboard (Optional)",
+        icon: "keyboard",
+        items: {
+          "Logitech K120": { price: 1295, image: "modmypc/keyboard/logitech.jpg" },
+          "Redragon K552": { price: 3490, image: "modmypc/keyboard/redragon.jpg" },
+          "HP GK320": { price: 2199, image: "modmypc/keyboard/hp.jpg" }
+        }
+      },
+      mousepad: {
+        label: "Mousepad (Optional)",
+        icon: "border-none",
+        items: {
+          "SteelSeries QcK": { price: 1299, image: "modmypc/mousepad/steelseries.jpg" },
+          "Cosmic Byte Equinox": { price: 699, image: "modmypc/mousepad/cosmic.jpg" }
+        }
+      },
+      headphone: {
+        label: "Headphones (Optional)",
+        icon: "headphones",
+        items: {
+          "boAt Rockerz 450": { price: 1799, image: "modmypc/headphone/boat.jpg" },
+          "Logitech G335": { price: 4995, image: "modmypc/headphone/logitech.jpg" }
+        }
+      },
+      chair: {
+        label: "Gaming Chair (Optional)",
+        icon: "chair",
+        items: {
+          "Corsair T3 Rush": { price: 21999, image: "modmypc/chair/corsair.jpg" },
+          "Secretlab Titan Evo 2022": { price: 49999, image: "modmypc/chair/secretlab.jpg" }
+        }
+      }
+    };
+
+    let selectedItems = {};
+    let activeCategory = null;
+
+    const categoryIcons = {};
+    function iconFor(key) {
+      return (componentData[key] && componentData[key].icon) || 'microchip';
+    }
+
+    // Initialize the tabs + panel builder UI
+    function initializeComponents() {
+      activeCategory = Object.keys(componentData)[0] || null;
+      renderTabs();
+      renderPanel();
+      renderSummaryStrip();
+    }
+
+    function renderTabs() {
+      const tabs = document.getElementById('builderTabs');
+      tabs.innerHTML = Object.keys(componentData).map(key => {
+        const comp = componentData[key];
+        const filled = !!selectedItems[key];
+        return `
+          <div class="builder-tab ${key === activeCategory ? 'active' : ''} ${filled ? 'filled' : ''}" onclick="setActiveCategory('${key}')">
+            <span class="bt-icon"><i class="fas fa-${comp.icon}"></i></span>
+            ${comp.label}
+            <i class="fas fa-circle-check bt-check"></i>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setActiveCategory(key) {
+      activeCategory = key;
+      renderTabs();
+      renderPanel();
+    }
+
+    function renderPanel() {
+      const title = document.getElementById('builderPanelTitle');
+      const grid = document.getElementById('builderItemGrid');
+      if (!activeCategory) { title.textContent = 'Select a component'; grid.innerHTML = ''; return; }
+      const comp = componentData[activeCategory];
+      title.textContent = comp.label;
+      const selectedName = selectedItems[activeCategory] ? selectedItems[activeCategory].name : null;
+      grid.innerHTML = Object.keys(comp.items).map(name => {
+        const item = comp.items[name];
+        const isSelected = name === selectedName;
+        return `
+          <div class="item-card ${isSelected ? 'selected' : ''}" onclick="selectItem('${activeCategory}', '${name.replace(/'/g, "\\'")}')">
+            <img src="${item.image}" alt="${name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22100%22%3E%3Crect fill=%22%23202020%22 width=%22160%22 height=%22100%22/%3E%3Ctext fill=%22%23A3A3A3%22 font-family=%22Arial%22 font-size=%2212%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+            <div class="item-name">${name}</div>
+            <div class="item-price">₹${item.price.toLocaleString()}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSummaryStrip() {
+      const strip = document.getElementById('builderSummaryStrip');
+      const keys = Object.keys(selectedItems);
+      if (keys.length === 0) { strip.innerHTML = ''; return; }
+      strip.innerHTML = keys.map(key => {
+        const item = selectedItems[key];
+        return `
+          <div class="summary-chip">
+            ${componentData[key].label}: ${item.name} — <span class="sc-price">₹${item.price.toLocaleString()}</span>
+            <span class="sc-remove" onclick="removeItem('${key}')"><i class="fas fa-times"></i></span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function removeItem(key) {
+      delete selectedItems[key];
+      renderTabs();
+      renderPanel();
+      renderSummaryStrip();
+      updateBill();
+    }
+
+    function selectItem(key, name) {
+      const item = componentData[key].items[name];
+      selectedItems[key] = { name, ...item };
+      renderTabs();
+      renderPanel();
+      renderSummaryStrip();
+      updateBill();
+    }
+
+    function updateBill() {
+      const billDetails = document.getElementById('billDetails');
+      const totalAmount = document.getElementById('totalAmount');
+      const subtotalAmount = document.getElementById('subtotalAmount');
+      const discountAmount = document.getElementById('discountAmount');
+      const gstAmount = document.getElementById('gstAmount');
+      
+      let html = '';
+      let subtotal = 0;
+      
+      Object.keys(selectedItems).forEach(key => {
+        const item = selectedItems[key];
+        html += `<tr>
+          <td><strong>${componentData[key].label}</strong></td>
+          <td>${item.name}</td>
+          <td style="text-align: right"><strong>₹${item.price.toLocaleString()}</strong></td>
+        </tr>`;
+        subtotal += item.price;
+      });
+      
+      if (html === '') {
+        billDetails.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 2rem; color: var(--secondary)"><i class="fas fa-info-circle"></i> Select components to build your configuration</td></tr>';
+      } else {
+        billDetails.innerHTML = html;
+      }
+      
+      const discount = Math.round(subtotal * 0.05);
+      const afterDiscount = subtotal - discount;
+      const gst = Math.round(afterDiscount * 0.18);
+      const grandTotal = afterDiscount + gst;
+      
+      subtotalAmount.textContent = `₹${subtotal.toLocaleString()}`;
+      discountAmount.textContent = `- ₹${discount.toLocaleString()}`;
+      gstAmount.textContent = `₹${gst.toLocaleString()}`;
+      totalAmount.textContent = `₹${grandTotal.toLocaleString()}`;
+    }
+
+    // ✅ DOWNLOAD PDF ONLY (WITHOUT WHATSAPP)
+    function downloadPDFOnly() {
+      if (Object.keys(selectedItems).length === 0) {
+        alert('Please select at least one component');
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      // Header with Shop Info
+      doc.setFontSize(20);
+      doc.setTextColor(0, 113, 227);
+      doc.text("INFINITY TECHNO SOLUTION", 105, 20, { align: "center" });
+      
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      doc.text("23/1290, Harikkara Street, Court Road, Palakkad-678001", 105, 28, { align: "center" });
+      doc.text("Phone: +91 8089637705", 105, 34, { align: "center" });
+      doc.text("Email: infinitytechnosolution@gmail.com", 105, 40, { align: "center" });
+      
+      // Line separator
+      doc.setDrawColor(0, 113, 227);
+      doc.setLineWidth(0.5);
+      doc.line(15, 44, 195, 44);
+      
+      // Document Title
+      doc.setFontSize(16);
+      doc.setTextColor(0, 113, 227);
+      doc.text("PC CONFIGURATION QUOTATION", 105, 55, { align: "center" });
+      
+      // Date and Time
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-IN');
+      const timeStr = now.toLocaleTimeString('en-IN');
+      doc.text(`Date: ${dateStr}`, 15, 65);
+      doc.text(`Time: ${timeStr}`, 15, 71);
+      
+      // Build table data
+      const rows = [];
+      let total = 0;
+      let slNo = 1;
+      
+      Object.keys(selectedItems).forEach(key => {
+        const item = selectedItems[key];
+        rows.push([
+          slNo++,
+          componentData[key].label,
+          item.name,
+          `Rs.${item.price.toLocaleString()}`
+        ]);
+        total += item.price;
+      });
+      
+      // Add table using autoTable
+      doc.autoTable({
+        head: [['#', 'Component', 'Selection', 'Price']],
+        body: rows,
+        startY: 80,
+        theme: 'grid',
+        headStyles: {
+          fillColor: [0, 113, 227],
+          textColor: [255, 255, 255],
+          fontStyle: 'bold',
+          halign: 'center',
+          fontSize: 10
+        },
+        columnStyles: {
+          0: { halign: 'center', cellWidth: 10 },
+          1: { halign: 'left', cellWidth: 45 },
+          2: { halign: 'left', cellWidth: 75 },
+          3: { halign: 'right', cellWidth: 45 }
+        },
+        bodyStyles: {
+          fontSize: 9,
+          cellPadding: 4
+        },
+        margin: { left: 10, right: 10 }
+      });
+      
+      // Bill Summary Table
+      const discount = Math.round(total * 0.05);
+      const afterDiscount = total - discount;
+      const gst = Math.round(afterDiscount * 0.18);
+      const grandTotal = afterDiscount + gst;
+
+      doc.autoTable({
+        body: [
+          ['Subtotal', `Rs.${total.toLocaleString()}`],
+          ['Discount (5%)', `- Rs.${discount.toLocaleString()}`],
+          ['GST (18%)', `Rs.${gst.toLocaleString()}`],
+        ],
+        startY: doc.autoTable.previous.finalY + 6,
+        theme: 'grid',
+        columnStyles: {
+          0: { halign: 'left',  cellWidth: 60, fontStyle: 'normal', textColor: [60, 60, 60], fillColor: [245, 248, 255] },
+          1: { halign: 'right', cellWidth: 45, fontStyle: 'bold',   textColor: [30, 30, 30], fillColor: [255, 255, 255] }
+        },
+        bodyStyles: { fontSize: 10, cellPadding: 5 },
+        didParseCell: function(data) {
+          if (data.row.index === 1) {
+            data.cell.styles.textColor = [200, 30, 30];
+          }
+        },
+        margin: { left: 90, right: 10 },
+        tableWidth: 105
+      });
+
+      // Grand Total row
+      doc.autoTable({
+        body: [['GRAND TOTAL', `Rs.${grandTotal.toLocaleString()}`]],
+        startY: doc.autoTable.previous.finalY,
+        theme: 'grid',
+        columnStyles: {
+          0: { halign: 'left',  cellWidth: 60, fontStyle: 'bold', textColor: [255,255,255], fillColor: [0, 113, 227] },
+          1: { halign: 'right', cellWidth: 45, fontStyle: 'bold', textColor: [255,255,255], fillColor: [0, 90, 200]  }
+        },
+        bodyStyles: { fontSize: 12, cellPadding: 6 },
+        margin: { left: 90, right: 10 },
+        tableWidth: 105
+      });
+
+      // Footer
+      const footerY = doc.autoTable.previous.finalY + 14;
+      doc.setFontSize(10);
+      doc.setTextColor(130, 130, 130);
+      doc.setFont(undefined, 'italic');
+      doc.text("Thank you for choosing Infinity Techno Solution", 105, footerY, { align: "center" });
+
+      // Download PDF
+      doc.save("ModMyPC_Quote.pdf");
+    }
+
+    // ✅ FIXED PDF GENERATION WITH SERVER UPLOAD AND WHATSAPP LINK SHARING
+    async function generateAndSendInvoice() {
+      if (Object.keys(selectedItems).length === 0) {
+        alert('Please select at least one component');
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      // Header with Shop Info
+      doc.setFontSize(20);
+      doc.setTextColor(0, 113, 227);
+      doc.text("INFINITY TECHNO SOLUTION", 105, 20, { align: "center" });
+      
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      doc.text("23/1290, Harikkara Street, Court Road, Palakkad-678001", 105, 28, { align: "center" });
+      doc.text("Phone: +91 8089637705", 105, 34, { align: "center" });
+      doc.text("Email: infinitytechnosolution@gmail.com", 105, 40, { align: "center" });
+      
+      // Line separator
+      doc.setDrawColor(0, 113, 227);
+      doc.setLineWidth(0.5);
+      doc.line(15, 44, 195, 44);
+      
+      // Document Title
+      doc.setFontSize(16);
+      doc.setTextColor(0, 113, 227);
+      doc.text("PC CONFIGURATION QUOTATION", 105, 55, { align: "center" });
+      
+      // Date and Time
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-IN');
+      const timeStr = now.toLocaleTimeString('en-IN');
+      doc.text(`Date: ${dateStr}`, 15, 65);
+      doc.text(`Time: ${timeStr}`, 15, 71);
+      
+      // Build table data
+      const rows = [];
+      let total = 0;
+      let slNo = 1;
+      
+      Object.keys(selectedItems).forEach(key => {
+        const item = selectedItems[key];
+        rows.push([
+          slNo++,
+          componentData[key].label,
+          item.name,
+          `Rs.${item.price.toLocaleString()}`
+        ]);
+        total += item.price;
+      });
+      
+      // Add table using autoTable
+      doc.autoTable({
+        head: [['#', 'Component', 'Selection', 'Price']],
+        body: rows,
+        startY: 80,
+        theme: 'grid',
+        headStyles: {
+          fillColor: [0, 113, 227],
+          textColor: [255, 255, 255],
+          fontStyle: 'bold',
+          halign: 'center',
+          fontSize: 10
+        },
+        columnStyles: {
+          0: { halign: 'center', cellWidth: 10 },
+          1: { halign: 'left', cellWidth: 45 },
+          2: { halign: 'left', cellWidth: 75 },
+          3: { halign: 'right', cellWidth: 45 }
+        },
+        bodyStyles: {
+          fontSize: 9,
+          cellPadding: 4
+        },
+        margin: { left: 10, right: 10 }
+      });
+      
+      // Bill Summary Table
+      const discount = Math.round(total * 0.05);
+      const afterDiscount = total - discount;
+      const gst = Math.round(afterDiscount * 0.18);
+      const grandTotal = afterDiscount + gst;
+
+      doc.autoTable({
+        body: [
+          ['Subtotal', `Rs.${total.toLocaleString()}`],
+          ['Discount (5%)', `- Rs.${discount.toLocaleString()}`],
+          ['GST (18%)', `Rs.${gst.toLocaleString()}`],
+        ],
+        startY: doc.autoTable.previous.finalY + 6,
+        theme: 'grid',
+        columnStyles: {
+          0: { halign: 'left',  cellWidth: 60, fontStyle: 'normal', textColor: [60, 60, 60], fillColor: [245, 248, 255] },
+          1: { halign: 'right', cellWidth: 45, fontStyle: 'bold',   textColor: [30, 30, 30], fillColor: [255, 255, 255] }
+        },
+        bodyStyles: { fontSize: 10, cellPadding: 5 },
+        didParseCell: function(data) {
+          if (data.row.index === 1) {
+            data.cell.styles.textColor = [200, 30, 30];
+          }
+        },
+        margin: { left: 90, right: 10 },
+        tableWidth: 105
+      });
+
+      // Grand Total row
+      doc.autoTable({
+        body: [['GRAND TOTAL', `Rs.${grandTotal.toLocaleString()}`]],
+        startY: doc.autoTable.previous.finalY,
+        theme: 'grid',
+        columnStyles: {
+          0: { halign: 'left',  cellWidth: 60, fontStyle: 'bold', textColor: [255,255,255], fillColor: [0, 113, 227] },
+          1: { halign: 'right', cellWidth: 45, fontStyle: 'bold', textColor: [255,255,255], fillColor: [0, 90, 200]  }
+        },
+        bodyStyles: { fontSize: 12, cellPadding: 6 },
+        margin: { left: 90, right: 10 },
+        tableWidth: 105
+      });
+
+      // Footer
+      const footerY = doc.autoTable.previous.finalY + 14;
+      doc.setFontSize(10);
+      doc.setTextColor(130, 130, 130);
+      doc.setFont(undefined, 'italic');
+      doc.text("Thank you for choosing Infinity Techno Solution", 105, footerY, { align: "center" });
+      
+      // Convert PDF to Blob and File for upload
+      const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const pdfBlob = doc.output("blob");
+      const pdfFile = new File([pdfBlob], "Invoice.pdf", { type: "application/pdf" });
+
+      // Upload PDF to server
+      const formData = new FormData();
+      formData.append("pdfFile", pdfFile);
+
+      let result;
+      try {
+        const response = await fetch("upload_invoice.php", {
+          method: "POST",
+          body: formData
+        });
+
+        const text = await response.text();
+        result = JSON.parse(text);
+      } catch (err) {
+        console.error("Upload error:", err);
+        alert("Error uploading invoice. Please try again.");
+        return;
+      }
+
+      // On successful upload
+      if (result.success && result.url) {
+        // 1. Download PDF for user
+        if (isiOS) {
+          const blobUrl = doc.output("bloburl");
+          window.location.href = blobUrl;
+        } else {
+          doc.save("ModMyPC_Quote.pdf");
+        }
+
+        // 2. Prepare WhatsApp message with itemized list and PDF link
+        const phoneNumber = "918089637705";
+        let message = `*PC CONFIGURATION QUOTE*\n\n`;
+        
+        // Add itemized list
+        Object.keys(selectedItems).forEach(key => {
+          const item = selectedItems[key];
+          message += `*${componentData[key].label}:* ${item.name} - ₹${item.price.toLocaleString()}\n`;
+        });
+        
+        message += `\n*Total: ₹${total.toLocaleString()}*\n\n`;
+        message += `📄 Download Invoice: ${result.url}\n\n`;
+        message += `_I would like to proceed with this configuration._`;
+        
+        const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        if (isiOS) {
+          setTimeout(() => {
+            window.location.href = waUrl;
+          }, 1500);
+        } else {
+          window.open(waUrl, "_blank");
+        }
+      } else {
+        alert("Upload failed. Please try again.");
+      }
+    }
+
+    function sendCustomSpec() {
+      const spec = document.getElementById('customSpec').value.trim();
+      if (!spec) {
+        alert('Please enter your custom requirements');
+        return;
+      }
+      
+      const message = `*CUSTOM PC REQUIREMENT*\n\n${spec}\n\n_Please provide a quote for this configuration._`;
+      window.open(`https://wa.me/918089637705?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Initialize — load products from DB then merge with defaults
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('modmypc/get_products.php')
+        .then(function(r){ return r.json(); })
+        .then(function(dbData) {
+          // Merge DB products INTO existing componentData
+          Object.keys(dbData).forEach(function(key) {
+            if (componentData[key]) {
+              // Category exists — merge items from DB (DB items override defaults)
+              Object.keys(dbData[key].items).forEach(function(name) {
+                componentData[key].items[name] = dbData[key].items[name];
+              });
+            } else {
+              // New category from DB — add it
+              componentData[key] = dbData[key];
+            }
+          });
+          initializeComponents();
+        })
+        .catch(function() {
+          // If fetch fails, just use the hardcoded data
+          initializeComponents();
+        });
+    });
+  </script>
+<script>
+(function () {
+  fetch('/auth/status.php', { credentials: 'same-origin' })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var badge = document.getElementById('navCartBadge');
+      if (badge && data.cart_count > 0) {
+        badge.textContent = ' (' + data.cart_count + ')';
+      }
+      if (data.logged_in) {
+        var name = data.name || 'Account';
+        var acc = document.getElementById('navAccountLink');
+        if (acc) { acc.href = '/auth/profile.php'; acc.innerHTML = '<i class="fas fa-user"></i> ' + name; }
+        var mAcc = document.getElementById('mobileAccountLink');
+        if (mAcc) { mAcc.href = '/auth/profile.php'; mAcc.innerHTML = '<i class="fas fa-user"></i> ' + name; }
+      }
+    })
+    .catch(function () { /* fail silently, static links still work */ });
+})();
+</script>
+<script>
+(function () {
+  var header = document.getElementById('mainHeader');
+  if (!header) return;
+  header.style.transition = 'transform .3s, box-shadow .3s';
+  var lastY = window.scrollY;
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    if (y > lastY && y > 120) header.style.transform = 'translateY(-100%)';
+    else header.style.transform = 'translateY(0)';
+    lastY = y;
+  }, { passive: true });
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js" defer></script>
+<script src="/assets/enhancements.js" defer></script>
+<script>document.addEventListener('DOMContentLoaded', function(){ if (typeof AOS !== 'undefined') AOS.init({ duration: 700, once: true, offset: 60 }); });</script>
+</body>
+</html>

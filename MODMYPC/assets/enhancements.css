@@ -1,0 +1,83 @@
+/* ============================================================
+   ModMyPC — Interaction layer v2
+   Expandable FAB, scroll progress, light mode, toasts
+   ============================================================ */
+
+/* ---- Light mode overrides ---- */
+body[data-theme="light"] {
+  --bg: #f4f5f8;
+  --surface: rgba(20,20,30,0.03);
+  --surface-2: rgba(20,20,30,0.05);
+  --border: rgba(20,20,30,0.09);
+  --dark: #14161d;
+  --secondary: #5b5f6b;
+}
+body[data-theme="light"]::before { opacity: .5; }
+body[data-theme="light"]::after { opacity: .02; }
+body[data-theme="light"] .card,
+body[data-theme="light"] .product-card,
+body[data-theme="light"] .auth-card { background: linear-gradient(180deg, rgba(20,20,30,0.03), rgba(20,20,30,0.01)); }
+body[data-theme="light"] input, body[data-theme="light"] select, body[data-theme="light"] textarea { color: #14161d; background: rgba(20,20,30,0.03); }
+body[data-theme="light"] h1, body[data-theme="light"] h2, body[data-theme="light"] h3, body[data-theme="light"] .product-card h3 { color: #14161d; }
+body[data-theme="light"] .site-logo { color: #14161d; }
+
+/* ---- Scroll progress bar ---- */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, #ff3860, #ff8a3d, #7c5cff);
+  z-index: 9999; transition: width .1s linear;
+  box-shadow: 0 0 12px rgba(255,56,96,.6);
+}
+
+/* ---- Expandable Quick Actions FAB (replaces the old two-circle stack) ---- */
+#fabCluster { position: fixed; bottom: 24px; right: 24px; z-index: 998; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+#fabMain {
+  width: 56px; height: 56px; border-radius: 18px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff; font-size: 20px; box-shadow: 0 10px 30px rgba(255,56,96,.4);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .3s cubic-bezier(.2,.9,.3,1.3), border-radius .3s;
+}
+#fabMain.open { transform: rotate(135deg); border-radius: 50%; }
+#fabOptions {
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+  max-height: 0; overflow: hidden; transition: max-height .35s ease;
+}
+#fabOptions.open { max-height: 300px; }
+.fab-option {
+  display: flex; align-items: center; gap: 10px; background: rgba(20,22,29,0.9);
+  backdrop-filter: blur(12px); border: 1px solid var(--border); color: #fff;
+  padding: 10px 16px 10px 10px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 600;
+  box-shadow: var(--shadow-sm); opacity: 0; transform: translateY(10px); transition: opacity .25s, transform .25s;
+}
+.fab-option.show { opacity: 1; transform: translateY(0); }
+.fab-option .fo-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--accent)); flex-shrink: 0; }
+
+@media (max-width: 560px) {
+  #fabCluster { bottom: 16px; right: 16px; }
+  #fabMain { width: 48px; height: 48px; font-size: 17px; }
+}
+
+/* ---- Toast notifications ---- */
+#toastStack { position: fixed; top: 80px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; max-width: 320px; }
+.toast {
+  background: rgba(20,22,29,0.92); backdrop-filter: blur(12px);
+  border: 1px solid var(--border); border-left: 4px solid var(--primary);
+  color: #fff; padding: 14px 16px; border-radius: 14px; font-size: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4); animation: toastIn .3s cubic-bezier(.2,.9,.3,1.2);
+}
+.toast.success { border-left-color: #22c55e; }
+.toast.error { border-left-color: #ff2d55; }
+@keyframes toastIn { from { opacity:0; transform: translateX(30px); } to { opacity:1; transform: translateX(0); } }
+.toast.hide { animation: toastOut .25s ease forwards; }
+@keyframes toastOut { to { opacity:0; transform: translateX(30px); } }
+
+/* ---- Scroll reveal fallback (used if AOS unavailable) ---- */
+[data-aos] { opacity: 0; transition: opacity .7s ease, transform .7s cubic-bezier(.2,.9,.3,1.1); }
+[data-aos].aos-in { opacity: 1; transform: none !important; }
+[data-aos="fade-up"] { transform: translateY(28px); }
+[data-aos="fade-down"] { transform: translateY(-28px); }
+[data-aos="zoom-in"] { transform: scale(.9); }
+
+/* ---- Number counter ---- */
+.counter-num { font-family: var(--font-heading); font-size: 40px; font-weight: 800; }

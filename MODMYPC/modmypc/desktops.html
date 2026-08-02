@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Desktops | ModMyPC</title>
+
+  <!-- Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* === Reset & Base === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #12151c;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    /* === Navbar === */
+    header {
+      background: #161922;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .logo i {
+      font-size: 28px;
+      color: #ff1e3c;
+    }
+
+    header .logo span {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ff1e3c;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #e5e7eb;
+      transition: color 0.3s, background 0.3s;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: #ff1e3c;
+      background: #1c1420;
+    }
+
+    /* === Hero Section === */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #242833;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #c8102e;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #cfd2d8;
+    }
+
+    .hero .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #ff1e3c;
+      color: #161922;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .hero .btn:hover {
+      background: #c8102e;
+    }
+
+    /* === Products === */
+    main { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #c8102e;
+      text-align: center;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .product-card {
+      background: #161922;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease;
+    }
+    .product-card:hover { transform: translateY(-5px); }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .product-card h3 {
+      font-size: 1.3em;
+      margin-bottom: 8px;
+      color: #c8102e;
+    }
+
+    .product-card p { font-size: .95em; color: #b8bcc4; }
+    .product-card p strong { color: #ff1e3c; }
+
+    button.continue-chat, .whatsapp-btn {
+      background: #ff1e3c;
+      color: #161922;
+      padding: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background .25s ease;
+      margin-top: auto;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+
+    button.continue-chat:hover, .whatsapp-btn:hover { background: #c8102e; }
+
+    /* === Modal === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.open { display: flex; }
+
+    .modal-content {
+      background: #161922;
+      padding: 20px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 520px;
+      color: #e5e7eb;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,.6);
+    }
+
+    .close-btn {
+      color: #ff1e3c;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 26px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+    }
+
+    /* === Appointment Form === */
+    #appointment-section {
+      max-width: 600px;
+      margin: 60px auto;
+      background: #161922;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    .form-group { margin-bottom: 15px; text-align: left; }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+      color: #ff1e3c;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      background: #0e1015;
+      color: #e5e7eb;
+      border: 1px solid #9a9ea8;
+      border-radius: 6px;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #ff1e3c;
+      outline: none;
+    }
+
+    /* === Floating Social Buttons === */
+    .social-icons {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 2000;
+    }
+    .social-icons a {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      color: #161922;
+      font-size: 22px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .social-icons a:hover { transform: scale(1.1); }
+    .social-icons .whatsapp { background: #25D366; }
+    .social-icons .instagram { background: #E4405F; }
+    .social-icons .chat { background: #ff1e3c; }
+
+    @media (max-width:600px){ .product-card { width:100%; } }
+  </style>
+<link rel="stylesheet" href="/assets/enhancements.css">
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Powerful Desktop Solutions</h1>
+    <p>Explore our premium desktops designed for gamers, creators, and professionals. Each system is crafted with top-tier components and expert assembly.</p>
+  </section>
+
+  <!-- Products -->
+  <main>
+    <section>
+      <h2>Prebuilt Desktops</h2>
+      <div class="products">
+        <div class="product-card">
+          <img src="images/best.jpg" alt="Prebuilt Gaming PC" onerror="this.style.opacity=.5;">
+          <h3>Prebuilt Gaming PC</h3>
+          <p>Intel i7, 16GB RAM, RTX 3060, 1TB SSD</p>
+          <p><strong>Price: ₹85,000</strong></p>
+          <button class="continue-chat" onclick="openModal('prebuiltGaming')">Continue Chat</button>
+        </div>
+
+        <div class="product-card">
+          <img src="images/officepc.jpg" alt="Office Prebuilt PC" onerror="this.style.opacity=.5;">
+          <h3>Office Prebuilt PC</h3>
+          <p>Intel i5, 8GB RAM, Integrated Graphics, 512GB SSD</p>
+          <p><strong>Price: ₹40,000</strong></p>
+          <button class="continue-chat" onclick="openModal('prebuiltOffice')">Continue Chat</button>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:50px;">
+      <h2>Custom Desktops</h2>
+      <div class="products">
+        <div class="product-card">
+          <img src="images/high.jpg" alt="Custom High-End Build" onerror="this.style.opacity=.5;">
+          <h3>Custom High-End Build</h3>
+          <p>AMD Ryzen 9, 32GB RAM, RTX 4080, 2TB NVMe SSD</p>
+          <p><strong>Price: ₹180,000</strong></p>
+          <button class="continue-chat" onclick="openModal('customHighEnd')">Continue Chat</button>
+        </div>
+
+        <div class="product-card">
+          <img src="images/gamer.jpg" alt="Custom Budget Build" onerror="this.style.opacity=.5;">
+          <h3>Custom Budget Build</h3>
+          <p>AMD Ryzen 5, 16GB RAM, GTX 1660, 1TB SSD</p>
+          <p><strong>Price: ₹70,000</strong></p>
+          <button class="continue-chat" onclick="openModal('customBudget')">Continue Chat</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Appointment -->
+    <section id="appointment-section">
+      <h2>Book an Appointment</h2>
+      <form method="POST" action="submit_enquiry.php" id="appointmentForm">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input type="tel" name="phone" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="preferred_datetime">Preferred Date & Time</label>
+          <input type="datetime-local" name="preferred_datetime" id="preferred_datetime">
+        </div>
+        <div class="form-group">
+          <label for="details">Product / Issue Details</label>
+          <textarea name="details" id="details" rows="3"></textarea>
+        </div>
+        <button type="submit" class="whatsapp-btn">Submit Appointment</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content" id="modal-content">
+      <button class="close-btn" title="Close" data-close>&times;</button>
+    </div>
+  </div>
+
+  <!-- Floating Social Buttons -->
+  <div class="social-icons">
+    <a href="https://wa.me/918089637705" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://instagram.com" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+    <a href="contact.html" class="chat"><i class="fas fa-comment-dots"></i></a>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const whatsappNumber = "918089637705";
+
+    const products = {
+      prebuiltGaming: {
+        title: "Prebuilt Gaming PC",
+        description: "Intel i7, 16GB RAM, RTX 3060, 1TB SSD",
+        price: "₹85,000",
+        whatsappMessage: "Hi ModMyPC, I am interested in the Prebuilt Gaming PC."
+      },
+      prebuiltOffice: {
+        title: "Office Prebuilt PC",
+        description: "Intel i5, 8GB RAM, Integrated Graphics, 512GB SSD",
+        price: "₹40,000",
+        whatsappMessage: "Hi ModMyPC, I want to know more about the Office Prebuilt PC."
+      },
+      customHighEnd: {
+        title: "Custom High-End Build",
+        description: "AMD Ryzen 9, 32GB RAM, RTX 4080, 2TB SSD",
+        price: "₹180,000",
+        whatsappMessage: "Hi ModMyPC, I’m interested in the Custom High-End Build."
+      },
+      customBudget: {
+        title: "Custom Budget Build",
+        description: "AMD Ryzen 5, 16GB RAM, GTX 1660, 1TB SSD",
+        price: "₹70,000",
+        whatsappMessage: "Hi ModMyPC, I want info on the Custom Budget Build."
+      }
+    };
+
+    window.openModal = function(key) {
+      const p = products[key];
+      if (!p) return;
+      modalContent.querySelectorAll('h2, p, a.whatsapp-btn').forEach(n => n.remove());
+      modalContent.insertAdjacentHTML('beforeend', `
+        <h2>${p.title}</h2>
+        <p>${p.description}</p>
+        <p><strong>Price:</strong> ${p.price}</p>
+        <a class="whatsapp-btn" target="_blank" rel="noopener"
+           href="https://wa.me/${whatsappNumber}?text=${encodeURIComponent(p.whatsappMessage)}">
+           Chat on WhatsApp
+        </a>
+      `);
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    };
+
+    window.closeModal = function() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalContent.querySelectorAll('h2, p, a.whatsapp-btn').forEach(n => n.remove());
+    };
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal || e.target.hasAttribute('data-close')) closeModal();
+    });
+
+    const form = document.getElementById('appointmentForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        if (location.protocol === 'file:') {
+          alert('Simulated submit. Run on a server for real submissions.');
+          form.reset();
+          return;
+        }
+        fetch(form.action, { method: 'POST', body: formData })
+        .then(res => res.text())
+        .then(data => { alert('Appointment submitted!'); form.reset(); })
+        .catch(err => { alert('Failed to submit.'); console.error(err); });
+      });
+    }
+  });
+</script>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/enhancements.js" defer></script>
+</body>
+</html>

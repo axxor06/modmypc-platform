@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Computer Diagnostics | ModMyPC</title>
+
+  <!-- Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* === Reset & Base === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #12151c;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    /* === Header with Logo === */
+    header {
+      background: #161922;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 2em;
+      font-weight: 700;
+      color: #ff1e3c;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .logo i {
+      font-size: 2.5em;
+      color: #ff1e3c;
+    }
+
+    header .logo span {
+      font-size: 2em;
+      font-weight: 700;
+      color: #ff1e3c;
+    }
+
+    /* === Hero Section === */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #242833;
+      border-radius: 12px;
+      margin: 20px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #c8102e;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #cfd2d8;
+    }
+
+    /* === Sections === */
+    .section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #c8102e;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #161922;
+      border-radius: 12px;
+      padding: 25px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .card i {
+      font-size: 28px;
+      color: #ff1e3c;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* === Call To Action === */
+    .cta {
+      text-align: center;
+      padding: 50px 20px;
+      margin: 40px 20px;
+      background: #ff1e3c;
+      border-radius: 12px;
+      color: #161922;
+    }
+
+    .cta h2 {
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    /* WhatsApp CTA button */
+    .cta a {
+      display: inline-block;
+      padding: 14px 35px;
+      background: #25D366; /* WhatsApp green */
+      color: #161922;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .cta a:hover {
+      background: #1ebe57; /* darker green on hover */
+      transform: scale(1.05);
+    }
+
+    /* === Footer === */
+    footer {
+      background: #161922;
+      color: #ff1e3c;
+      text-align: center;
+      padding: 20px;
+      font-weight: 500;
+      border-top: 2px solid #242833;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 32px; }
+      .section h2 { font-size: 24px; }
+      .cta h2 { font-size: 22px; }
+      .card { font-size: 1em; padding: 20px; }
+    }
+  </style>
+<link rel="stylesheet" href="/assets/enhancements.css">
+</head>
+<body>
+
+  <!-- Header with Logo -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-microchip"></i>
+      <span>ModMyPC</span>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Computer Diagnostics</h1>
+    <p>Is your computer running slow, overheating, or showing errors? Let our experts diagnose and resolve the issue with precision.</p>
+  </section>
+
+  <!-- What We Diagnose Section -->
+  <section class="section">
+    <h2>What We Diagnose</h2>
+    <div class="cards">
+      <div class="card"><i class="fas fa-microchip"></i> Hardware Health Check (RAM, HDD/SSD, CPU, GPU)</div>
+      <div class="card"><i class="fas fa-virus"></i> Virus, Malware & Security Threat Scan</div>
+      <div class="card"><i class="fas fa-rocket"></i> Performance Issues & Boot Time Optimization</div>
+      <div class="card"><i class="fas fa-network-wired"></i> Network Connectivity & Internet Troubleshooting</div>
+      <div class="card"><i class="fas fa-desktop"></i> Operating System Errors & Blue Screen Fixes</div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="section">
+    <h2>Pricing</h2>
+    <div class="cards">
+      <div class="card"><i class="fas fa-receipt"></i> Basic Diagnostic - ₹299</div>
+      <div class="card"><i class="fas fa-flask"></i> Full System Analysis - ₹499</div>
+      <div class="card"><i class="fas fa-gift"></i> Included FREE with any service or upgrade</div>
+    </div>
+  </section>
+
+  <!-- Call To Action -->
+  <section class="cta">
+    <h2>Ready to Fix Your PC?</h2>
+    <a href="https://wa.me/918089637705?text=Hi%20ModMyPC,%20I%20need%20a%20computer%20diagnostic%20service." target="_blank">
+      Book a Diagnosis on WhatsApp
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 ModMyPC. All rights reserved.
+  </footer>
+
+<script src="/assets/site.js" defer></script>
+<script src="/assets/enhancements.js" defer></script>
+</body>
+</html>
